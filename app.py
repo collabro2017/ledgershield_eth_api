@@ -5,4 +5,5 @@ app = Flask(__name__)
 
 app.register_blueprint(wallet, url_prefix='/wallet')
 
-app.run()
+if __name__ == "__main__":
+	app.run()
