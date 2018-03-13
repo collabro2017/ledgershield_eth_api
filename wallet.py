@@ -18,7 +18,19 @@ def get_block(block):
     dict = Web3Util().getBlock(block=block)
     return jsonify(dict)
 
+@wallet.route('/master')
+def create_master_account():
+    d = Web3Util().create_master_account()
+    return jsonify(d)
+
 @wallet.route('/transfer/<to>/<amount>')
 def send_funds(to, amount):
     data = Web3Util().send_transaction(to, amount)
+    print(data)
     return jsonify({'txid':data})
+
+@wallet.route('/syncing')
+def get_syncing():
+    d = Web3Util().syncing()
+    print(d)
+    return jsonify(d)
