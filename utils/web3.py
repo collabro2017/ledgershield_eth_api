@@ -1,12 +1,13 @@
 from web3 import Web3, HTTPProvider, IPCProvider
+from config.models import NodeConfig
 
 class Web3Util():
 
-
     def __init__(self):
-        self.we3obj = Web3(HTTPProvider('http://18.219.191.49/rpc'))
-        self.from_address = '0xfdb1e41acc2657337d59018ffca2dc6fd7708d4c'
-        self.from_password = 'master_wallet_password'
+        node = NodeConfig.objects.get()
+        self.we3obj = Web3(HTTPProvider(node.node_url))
+        self.from_address = node.master_wallet_address
+        self.from_password = node.master_wallet_password
 
     def create_master_account(self):
         return self.create_account(self.from_password)
