@@ -37,6 +37,7 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'channels',
 
     'rest_framework',
     'rest_framework_swagger'
@@ -128,3 +129,5 @@ SWAGGER_SETTINGS = {
     'JSON_EDITOR': True,
     'DOC_EXPANSION': True
 }
+
+ASGI_APPLICATION = 'ethapi.routing.application'
