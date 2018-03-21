@@ -21,6 +21,18 @@ class Web3Util():
     def create_account(self, passphrase):
         return  self.we3obj.personal.newAccount(password=passphrase)
 
+
+    def watch_account(self, callback):
+        filter = self.we3obj.eth.filter('latest')
+        filter.watch(callback)
+
+    def watch_balance(self, address):
+        return self.we3obj.eth.getBalance(address)
+
+
+    def get_transaction(self, tx_hash):
+        return self.we3obj.eth.getTransactionReceipt(tx_hash)
+
     def send_transaction(self, to, value):
         value = Web3.toWei(value, 'ether')
         print('{}, {}'.format(to, value))
