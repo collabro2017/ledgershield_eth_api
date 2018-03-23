@@ -1,3 +1,6 @@
+import ast
+import json
+
 from web3 import Web3, HTTPProvider, IPCProvider
 from config.models import NodeConfig
 
@@ -35,9 +38,16 @@ class Web3Util():
 
     def send_transaction(self, to, value):
         value = Web3.toWei(value, 'ether')
-        print('{}, {}'.format(to, value))
         try:
-            return self.we3obj.personal.sendTransaction({'to': to, 'value': value, 'from': self.from_address}, passphrase=self.from_password)
+            return self.we3obj.personal.sendTransaction({'to': to, 'value': value, 'from': self.from_address}, passphrase=self.from_password), None
         except Exception as e:
-            print(e)
-            return None
+            return None, self.normalize_error_message(str(e))
+
+    def normalize_error_message(self, error):
+        try:
+            error_obj = ast.literal_eval(error)
+            if 'message' in error_obj:
+                return error_obj['message']
+            return 'Unknown error occurred during withdrawal!'
+        except:
+            return error
