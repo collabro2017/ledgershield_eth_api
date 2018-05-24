@@ -133,7 +133,7 @@ SWAGGER_SETTINGS = {
 ASGI_APPLICATION = 'ethapi.routing.application'
 
 ETH_SETTINGS = {
-    MASTER_WALLET_ADDRESS: "",
-    MASTER_WALLET_PASS: "",
-    NODE_URL: ""
+    'MASTER_WALLET_ADDRESS': '',
+    'MASTER_WALLET_PASS': '',
+    'NODE_URL': 'http://localhost:8545'
 }
