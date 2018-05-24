@@ -1,5 +1,6 @@
 import ast
 import json
+from django.conf import settings
 
 from web3 import Web3, HTTPProvider, IPCProvider
 from config.models import NodeConfig
@@ -7,10 +8,10 @@ from config.models import NodeConfig
 class Web3Util():
 
     def __init__(self):
-        node = NodeConfig.objects.get()
-        self.we3obj = Web3(HTTPProvider(node.node_url))
-        self.from_address = node.master_wallet_address
-        self.from_password = node.master_wallet_password
+        
+        self.we3obj = Web3(HTTPProvider(settings.ETH_SETTINGS['NODE_URL'])
+        self.from_address = settings.ETH_SETTINGS['MASTER_WALLET_ADDRESS']
+        self.from_password = settings.ETH_SETTINGS['MASTER_WALLET_PASS']
 
     def create_master_account(self):
         return self.create_account(self.from_password)
